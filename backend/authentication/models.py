@@ -1,8 +1,11 @@
-# from django.db import models
+from django.db import models
+from email.policy import default
 from django.contrib.auth.models import AbstractUser
 
 
 class User(AbstractUser):
+    is_artist = models.BooleanField('artist status', default=False)
+    is_reviewer = models.BooleanField('reviewer status', default=False)
     pass
     '''
     This is a custom version of the built in User class
