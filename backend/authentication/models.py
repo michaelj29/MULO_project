@@ -6,7 +6,6 @@ from django.contrib.auth.models import AbstractUser
 class User(AbstractUser):
     is_artist = models.BooleanField('artist status', default=False)
     is_reviewer = models.BooleanField('reviewer status', default=False)
-    pass
     '''
     This is a custom version of the built in User class
     It contains all of the built in fields and functionality of the standard User
