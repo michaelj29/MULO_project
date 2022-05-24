@@ -12,8 +12,8 @@ class Song(models.Model):
     year = models.IntegerField()
 
 class Reviewer(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
-    song = models.ForeignKey(Song, on_delete=models.CASCADE, max_length=100)
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    song = models.ForeignKey(Song, on_delete=models.CASCADE)
     city = models.CharField(max_length=100)
     state = models.CharField(max_length=100)
     favorite_lyric = models.CharField(max_length=100)
