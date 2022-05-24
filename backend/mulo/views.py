@@ -26,33 +26,34 @@ def get_all_reviews(request):
 def user_song(request):
     if request.method == 'POST':
         serializer = SongSerializer(data=request.data)
-        if serializer.is_valid():
+        if serializer.is_valid(raise_exception=True):
             serializer.save(user=request.user)
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-    elif request.method == 'GET':
-        songs = Song.objects.filter(user_id=request.user.id)
-        serializer = ReviewerSerializer(songs, many=True)
-        return Response(serializer.data)
 
-@api_view(['GET', 'POST', 'PUT', 'DELETE'])
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
+def post_review(request):
+    if request.method == 'POST':
+        serializer = ReviewerSerializer(data=request.data)
+        if serializer.is_valid(raise_exception=True):
+            serializer.save(user=request.user)
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+@api_view(['GET', 'PUT', 'DELETE'])
 @permission_classes([IsAuthenticated])
 def user_review(request, pk):
     review = get_object_or_404(Reviewer, pk=pk)
-    if request.method == 'POST':
-        serializer = ReviewerSerializer(data=request.data)
-        if serializer.is_valid():
-            serializer.save(user=request.user)
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-    elif request.method == 'GET':
+    if request.method == 'GET':
         reviews = Reviewer.objects.filter(user_id=request.user.id)
         serializer = ReviewerSerializer(reviews, many=True)
         return Response(serializer.data)
     elif request.method == 'PUT':
         serializer = ReviewerSerializer(review, data=request.data)
         serializer.is_valid(raise_exception=True)
-        serializer.save
+        serializer.save()
         return Response(serializer.data)
     elif request.method == 'DELETE':
         review.delete()

@@ -11,5 +11,6 @@ class SongSerializer(serializers.ModelSerializer):
 class ReviewerSerializer(serializers.ModelSerializer):
     class Meta:
         model = Reviewer
-        fields = ['user_id', 'song', 'city', 'state', 'favorite_lyric', 'favorite_instrument', 'rating', 'overview' ]
+        fields = ['user_id', 'song_id', 'city', 'state', 'favorite_lyric', 'favorite_instrument', 'rating', 'overview' ]
         depth = 1
+    song_id = serializers.IntegerField(write_only=True)

@@ -4,7 +4,7 @@ from django.core.validators import MaxValueValidator, MinValueValidator
 
 # Create your models here.
 class Song(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, )
     stage_name = models.CharField(max_length=100, default="Artist Name")
     song_title = models.CharField(max_length=50)
     video_id = models.CharField(max_length=100)
@@ -12,7 +12,7 @@ class Song(models.Model):
     year = models.IntegerField()
 
 class Reviewer(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, null=True,on_delete=models.CASCADE)
     song = models.ForeignKey(Song, on_delete=models.CASCADE)
     city = models.CharField(max_length=100)
     state = models.CharField(max_length=100)
