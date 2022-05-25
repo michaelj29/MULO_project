@@ -9,30 +9,37 @@ const HomePage = () => {
   // The "token" value is the JWT token that you will send in the header of any request requiring authentication
   //TODO: Add an AddCars Page to add a car for a logged in user's garage
   const [user, token] = useAuth();
-  const [cars, setCars] = useState([]);
+  const [reviews, setReviews] = useState([]);
 
   useEffect(() => {
-    const fetchCars = async () => {
+    const fetchReviews = async () => {
       try {
-        let response = await axios.get("http://127.0.0.1:8000/api/cars/", {
+        let response = await axios.get("http://127.0.0.1:8000/api/mulo/all-reviews/", {
           headers: {
             Authorization: "Bearer " + token,
           },
         });
-        setCars(response.data);
+        setReviews(response.data);
       } catch (error) {
         console.log(error.response.data);
       }
     };
-    fetchCars();
+    fetchReviews();
   }, [token]);
   return (
     <div className="container">
       <h1>Home Page for {user.username}!</h1>
-      {cars &&
-        cars.map((car) => (
-          <p key={car.id}>
-            {car.year} {car.model} {car.make}
+      {reviews &&
+        reviews.map((review) => (
+          <p key={review.id}>
+             {review.city} {review.state} {review.favorite_lyrics} {review.favorite_instrument} {review.rating} {review.overview}
+            {/* "user_id": 2,
+        "city": "Memphis",
+        "state": "Tennessee",
+        "favorite_lyric": "red card over blue card",
+        "favorite_instrument": "plus four card",
+        "rating": 5,
+        "overview": "thanks for teaching me...dan" */}
           </p>
         ))}
     </div>
