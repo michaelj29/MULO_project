@@ -32,16 +32,12 @@ const HomePage = () => {
       {reviews &&
         reviews.map((review) => (
           <p key={review.id}>
-             {review.city} {review.state} {review.favorite_lyrics} {review.favorite_instrument} {review.rating} {review.overview}
-            {/* "user_id": 2,
-        "city": "Memphis",
-        "state": "Tennessee",
-        "favorite_lyric": "red card over blue card",
-        "favorite_instrument": "plus four card",
-        "rating": 5,
-        "overview": "thanks for teaching me...dan" */}
+             {review.city} {review.state} {review.favorite_lyrics} 
+             {review.favorite_instrument} 
+             {review.rating} {review.overview}
+
           </p>
-        ))}
+        )).reverse()}
     </div>
   );
 };
