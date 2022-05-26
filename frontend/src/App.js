@@ -6,7 +6,8 @@ import "./App.css";
 import HomePage from "./pages/HomePage/HomePage";
 import LoginPage from "./pages/LoginPage/LoginPage";
 import RegisterPage from "./pages/RegisterPage/RegisterPage";
-
+import ReviewerPage from "./pages/ReviewerPage/ReviewerPage";
+import ArtistPage from "./pages/ArtistPage/ArtistPage";
 // Component Imports
 import Navbar from "./components/NavBar/NavBar";
 import Footer from "./components/Footer/Footer";
@@ -16,7 +17,7 @@ import PrivateRoute from "./utils/PrivateRoute";
 
 function App() {
 
-  
+
   return (
     <div>
       <Navbar />
@@ -26,6 +27,22 @@ function App() {
           element={
             <PrivateRoute>
               <HomePage />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/reviewer-page"
+          element={
+            <PrivateRoute>
+              <ReviewerPage />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/artist-page"
+          element={
+            <PrivateRoute>
+              <ArtistPage />
             </PrivateRoute>
           }
         />
