@@ -4,7 +4,7 @@ from .models import Reviewer, Song
 class SongSerializer(serializers.ModelSerializer):
     class Meta:
         model = Song
-        fields = ['user_id', 'stage_name', 'song_title', 'video_id', 'genre', 'year' ]
+        fields = ['id','user_id', 'stage_name', 'song_title', 'video_id', 'genre', 'year' ]
 
 
 
