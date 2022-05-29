@@ -5,6 +5,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import axios from 'axios';
 import useAuth from "../../hooks/useAuth";
 import AddReview from '../../components/AddReview/AddReview';
+import UpdateReview from '../../components/UpdateReview/UpdateReview';
 
 
 const ReviewerPage = () => {
@@ -12,6 +13,7 @@ const ReviewerPage = () => {
     const [user, token] = useAuth();
     const [songs, setSongs] = useState([]);
     const [reviews, setReviews] = useState([]);
+    const [reviewId, setReviewId] = useState('')
 
     const myReviews = reviews.filter(review => review.user_id === user.id);
 
@@ -73,9 +75,25 @@ const ReviewerPage = () => {
             console.log(error.response.data);
           }
         };
+
+        const updateReview = async (editReview) => {
+
+            try {
+              let response = await axios.put(`http://127.0.0.1:8000/api/mulo/${reviewId}/`, editReview, {
+                 
+                headers: {
+                  Authorization: "Bearer " + token,
+                },
+              });
+              console.log(response.data)
+            } catch (error) {
+              console.log(error.response.data);
+            }
+          };
+
     return ( 
         <div>
-            <h3>Reviewer Page  {user.id}</h3>
+            <h3>Reviewer Page {user.id}</h3>
             {songs.map(song => {
         return (
           <div>
@@ -106,9 +124,9 @@ const ReviewerPage = () => {
           <div>
             <Card style={{ width: '20rem' }}>
                 <Card.Body>
-                    <Card.Title>{user.username} - - - {user.id}</Card.Title>
+                    <Card.Title>{user.username}  || Review ID: {reviews.id}</Card.Title>
                     <Card.Text>
-                    {`Rating: ${reviews.rating}    ${reviews.id}  Favorite Lyric: ${reviews.favorite_lyric}`}
+                    {`Rating: ${reviews.rating}  Favorite Lyric: ${reviews.favorite_lyric}`}
                     </Card.Text>
                     <Card.Text>
                     {`${reviews.overview}`}
@@ -122,7 +140,12 @@ const ReviewerPage = () => {
         );
       })}
       </div>
-            <AddReview fixed="bottom" postReview={postReview}/>
+            <div>
+                <UpdateReview  fixed="top" updateReview={updateReview} setReviewId={setReviewId} />
+            </div>
+            <div>
+                <AddReview fixed="bottom" postReview={postReview}/>
+            </div>
         </div>
      );
 }

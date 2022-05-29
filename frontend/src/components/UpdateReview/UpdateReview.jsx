@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Form, Row , Col, Button, Card} from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-const AddReview = ({postReview}) => {
+const UpdateReview = ({updateReview, setReviewId}) => {
+
 
     const [city, setCity] = useState('');
     const [state, setState] = useState('');
@@ -12,9 +13,10 @@ const AddReview = ({postReview}) => {
     const [overview, setOverview] = useState('');
     const [songId, setSongId] = useState('');
 
+
     function handleSubmit(event){
         event.preventDefault();
-        let newReview = {
+        let editReview = {
             city : city,
             state: state,
             favorite_lyric: favoriteLyric,
@@ -23,15 +25,19 @@ const AddReview = ({postReview}) => {
             overview: overview,
             song_id: songId
         }
-        postReview(newReview)
+        console.log(editReview);
+        updateReview(editReview);
     };
 
     return ( 
         <div> 
-            <div className='fixed-bottom'>
+            <div className='fixed-top'>
                 <Card body>
                     <Form onSubmit={handleSubmit}>
                         <Row>
+                            <Col>
+                            <Form.Control placeholder="ReviewID" onChange={(event) => setReviewId(event.target.value)} />
+                            </Col>
                             <Col>
                             <Form.Control placeholder="City" onChange={(event) => setCity(event.target.value)} value={city}/>
                             </Col>
@@ -54,7 +60,7 @@ const AddReview = ({postReview}) => {
                             <Form.Control placeholder="Song Id" onChange={(event) => setSongId(event.target.value)} value={songId}/>
                             </Col>
                             <Col xs="auto" className="my-1">
-                                <Button type="submit">SUBMIT</Button>
+                                <Button variant="warning" type="submit">UPDATE</Button>
                             </Col>
                         </Row>
                     </Form>
@@ -64,4 +70,4 @@ const AddReview = ({postReview}) => {
      );
 }
  
-export default AddReview;
+export default UpdateReview;
