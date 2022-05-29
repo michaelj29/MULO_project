@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import Card from 'react-bootstrap/Card';
-import Button from 'react-bootstrap/Button'
+import { Form, Row , Col, Button, Card} from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import axios from 'axios';
 import useAuth from "../../hooks/useAuth";
@@ -13,9 +12,17 @@ const ReviewerPage = () => {
     const [user, token] = useAuth();
     const [songs, setSongs] = useState([]);
     const [reviews, setReviews] = useState([]);
-    const [reviewId, setReviewId] = useState('')
+    const [reviewId, setReviewId] = useState('');
+    const [searchSong, setSearchSong] = useState('');
 
     const myReviews = reviews.filter(review => review.user_id === user.id);
+    const searchBySongTitle = songs.filter(song => {
+       if(song.song_title.toLowerCase() === searchSong.toLocaleLowerCase()){
+           return true
+       } else if (searchSong === ''){
+           return song
+       }
+    })
 
     async function postReview(newReview){
     try {
@@ -94,7 +101,17 @@ const ReviewerPage = () => {
     return ( 
         <div>
             <h3>Reviewer Page {user.id}</h3>
-            {songs.map(song => {
+            <div>
+                <Form onChange={(event) => setSearchSong(event.target.value)}>
+                    <Col>
+                        <Form.Control placeholder="searchSong by title" />
+                    </Col>
+                    <Col xs="auto" className="my-1">
+                        <Button type="submit">SUBMIT</Button>
+                    </Col>
+                </Form>
+            </div>
+            {searchBySongTitle.map(song => {
         return (
           <div>
             <Card style={{ width: '40rem' }}>
