@@ -143,16 +143,16 @@ const ArtistPage = () => {
             <h1>Order by city</h1>
             <div>
             <Button variant="secondary" onClick={() =>{
-                setListOrder('city')}}>CHANGE ORDER CITY A-Z
+                setListOrder('city')}}>CITY A-Z
             </Button>
             <Button variant="secondary" onClick={() =>{
-                setListOrder('rate')}}>CHANGE ORDER RATING 5-1
+                setListOrder('city reverse')}}>CITY Z-A
             </Button>
             <Button variant="secondary" onClick={() =>{
-                setListOrder('city reverse')}}>CHANGE ORDER CITY Z-A
+                setListOrder('rate')}}>RATING 5-1
             </Button>
             <Button variant="secondary" onClick={() =>{
-                setListOrder('rate reverse')}}>CHANGE ORDER RATING 1-5
+                setListOrder('rate reverse')}}>RATING 1-5
             </Button>
         </div>
             {userReviews.map(reviewByCity => {

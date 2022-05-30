@@ -32,9 +32,7 @@ const HomePage = () => {
       {reviews &&
         reviews.map((review) => (
           <p key={review.id}>
-             {review.city} {review.state} {review.favorite_lyrics} 
-             {review.favorite_instrument} 
-             {review.rating} {review.overview}
+             {review.city} {review.state} {review.favorite_lyrics} {review.favorite_instrument} {review.rating} {review.overview}
 
           </p>
         )).reverse()}

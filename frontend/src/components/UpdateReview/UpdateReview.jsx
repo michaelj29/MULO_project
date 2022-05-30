@@ -25,7 +25,6 @@ const UpdateReview = ({updateReview, setReviewId}) => {
             overview: overview,
             song_id: songId
         }
-        console.log(editReview);
         updateReview(editReview);
     };
 

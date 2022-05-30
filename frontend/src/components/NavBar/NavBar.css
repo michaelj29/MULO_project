@@ -9,7 +9,7 @@ li {
 }
 
 .navBar {
-  background: steelblue;
+  background: rgb(102, 102, 102);
   box-shadow: 4px 2px 5px gray;
   color: white;
   margin-bottom: 2rem;
@@ -19,7 +19,7 @@ li {
 .navBar button {
   background: transparent;
   border: 2px solid white;
-  color: white;
+  color: rgb(227, 207, 22);
   padding: 0.4rem 0.5rem;
 }
 
@@ -32,4 +32,8 @@ li {
 .brand {
   cursor: pointer;
   font-size: 2rem;
+}
+
+b {
+  color: rgb(227, 207, 22);
 }
