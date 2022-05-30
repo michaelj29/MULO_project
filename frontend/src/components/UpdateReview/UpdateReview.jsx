@@ -30,7 +30,7 @@ const UpdateReview = ({updateReview, setReviewId}) => {
 
     return ( 
         <div> 
-            <div className='fixed-top'>
+            <div >
                 <Card body>
                     <Form onSubmit={handleSubmit}>
                         <Row>

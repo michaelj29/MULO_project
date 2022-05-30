@@ -4,6 +4,7 @@ import { useNavigate, Link } from "react-router-dom";
 import AuthContext from "../../context/AuthContext";
 import "./NavBar.css";
 
+
 const Navbar = () => {
 
   const { logoutUser, user } = useContext(AuthContext);
@@ -11,7 +12,7 @@ const Navbar = () => {
 
 
   return (
-    <div className="navBar" >
+    <div className="navBar"  >
       <ul>
         <li className="brand">
           <Link to="/" style={{ textDecoration: "none", color: "white" }}>
