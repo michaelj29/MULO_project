@@ -18,14 +18,13 @@ li {
 
 .navBar button {
   background: transparent;
-  border: 2px solid white;
-  color: rgb(227, 207, 22);
+  border: none;
+  color: #ffc107;
   padding: 0.4rem 0.5rem;
 }
 
 .navBar button:hover {
   background: white;
-  color: steelblue;
   cursor: pointer;
 }
 
@@ -35,5 +34,5 @@ li {
 }
 
 b {
-  color: rgb(227, 207, 22);
+  color: #ffc107;
 }

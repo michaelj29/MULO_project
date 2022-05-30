@@ -1,6 +1,8 @@
 import React from "react";
 import { useEffect, useState } from "react";
 import useAuth from "../../hooks/useAuth";
+import Card from 'react-bootstrap/Card'
+import './HomePage.css'
 
 import axios from "axios";
 
@@ -26,16 +28,28 @@ const HomePage = () => {
     };
     fetchReviews();
   }, [token]);
+
+
   return (
-    <div className="container">
-      <h1>Home Page for {user.username}!</h1>
+    <div className="card-container">
       {reviews &&
         reviews.map((review) => (
           <p key={review.id}>
-             {review.city} {review.state} {review.favorite_lyrics} {review.favorite_instrument} {review.rating} {review.overview}
-
+              <div>
+                <Card className="card" bg={'warning'} text={'white'} border={'dark'}style={{ width: '20rem' }}>
+                    <Card.Body>
+                      <Card.Header>City: {review.city} || Rating: {review.rating} </Card.Header>
+                        <Card.Text>
+                        Song title : {review.song.song_title}
+                        </Card.Text>
+                        <Card.Text>
+                        Overview: {review.overview}
+                        </Card.Text>
+                    </Card.Body>
+                </Card> 
+              </div>
           </p>
-        )).reverse()}
+        ))}
     </div>
   );
 };
