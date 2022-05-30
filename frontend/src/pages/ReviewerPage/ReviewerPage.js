@@ -106,9 +106,6 @@ const ReviewerPage = () => {
                     <Col>
                         <Form.Control placeholder="searchSong by title" />
                     </Col>
-                    <Col xs="auto" className="my-1">
-                        <Button type="submit">SUBMIT</Button>
-                    </Col>
                 </Form>
             </div>
             {searchBySongTitle.map(song => {
