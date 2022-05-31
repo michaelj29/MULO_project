@@ -1,8 +1,12 @@
 .sort-btn {
     height: 82px;
-    width: 401px;
+    width: 420px;
 }
 
 .sort-card {
     margin-left: 40px;
+}
+
+Button {
+    margin: .5px;
 }
