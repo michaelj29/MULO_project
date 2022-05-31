@@ -1,0 +1,266 @@
+{
+	"info": {
+		"_postman_id": "b06430c2-c405-4489-9c00-ce40fcf4431a",
+		"name": "MULO_Backend",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get_All_Songs",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjU0Mjg3MzQzLCJpYXQiOjE2NTM0MjMzNDMsImp0aSI6IjkxMjNmNjYxMzgxYjQ4MWU5NWMxODNlN2RiMTgzMDE0IiwidXNlcl9pZCI6MiwidXNlcm5hbWUiOiJkYW50aGVtYW4iLCJmaXJzdF9uYW1lIjoiRGFuaWVsIiwiaXNfYXJ0aXN0IjpmYWxzZSwiaXNfcmV2aWV3ZXIiOnRydWV9.SJW5PEaLdQYxa7eC0nXzDS5QiMZmMOtIbFyWZ2nYln4",
+						"type": "text"
+					},
+					{
+						"key": "",
+						"value": "",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/mulo/all-songs/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"mulo",
+						"all-songs",
+						""
+					],
+					"query": [
+						{
+							"key": "",
+							"value": null,
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get_All_Reviews",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjU0Mjg3MzQzLCJpYXQiOjE2NTM0MjMzNDMsImp0aSI6IjkxMjNmNjYxMzgxYjQ4MWU5NWMxODNlN2RiMTgzMDE0IiwidXNlcl9pZCI6MiwidXNlcm5hbWUiOiJkYW50aGVtYW4iLCJmaXJzdF9uYW1lIjoiRGFuaWVsIiwiaXNfYXJ0aXN0IjpmYWxzZSwiaXNfcmV2aWV3ZXIiOnRydWV9.SJW5PEaLdQYxa7eC0nXzDS5QiMZmMOtIbFyWZ2nYln4",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/mulo/all-reviews/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"mulo",
+						"all-reviews",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create_New_Song",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "",
+						"value": "",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/mulo/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"mulo",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create_New_Review",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjU0Mjg3MzQzLCJpYXQiOjE2NTM0MjMzNDMsImp0aSI6IjkxMjNmNjYxMzgxYjQ4MWU5NWMxODNlN2RiMTgzMDE0IiwidXNlcl9pZCI6MiwidXNlcm5hbWUiOiJkYW50aGVtYW4iLCJmaXJzdF9uYW1lIjoiRGFuaWVsIiwiaXNfYXJ0aXN0IjpmYWxzZSwiaXNfcmV2aWV3ZXIiOnRydWV9.SJW5PEaLdQYxa7eC0nXzDS5QiMZmMOtIbFyWZ2nYln4",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "    {\n        \n        \"song_id\": 1,\n        \"city\": \"Memphis\",\n        \"state\": \"Tennessee\",\n        \"favorite_lyric\": \"red card over blue card\",\n        \"favorite_instrument\": \"plus four card\",\n        \"rating\": 5,\n        \"overview\": \"thanks for teaching me...dan\"\n    }\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/mulo/create/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"mulo",
+						"create",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update_Review",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjU0Mjg3MzQzLCJpYXQiOjE2NTM0MjMzNDMsImp0aSI6IjkxMjNmNjYxMzgxYjQ4MWU5NWMxODNlN2RiMTgzMDE0IiwidXNlcl9pZCI6MiwidXNlcm5hbWUiOiJkYW50aGVtYW4iLCJmaXJzdF9uYW1lIjoiRGFuaWVsIiwiaXNfYXJ0aXN0IjpmYWxzZSwiaXNfcmV2aWV3ZXIiOnRydWV9.SJW5PEaLdQYxa7eC0nXzDS5QiMZmMOtIbFyWZ2nYln4",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"city\": \"DeleteMe\",\n    \"state\": \"Tennessee\",\n    \"favorite_lyric\": \"red card over blue card\",\n    \"favorite_instrument\": \"plus four card\",\n    \"rating\": 3,\n    \"overview\": \"thanks for teaching me\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/mulo/3/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"mulo",
+						"3",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete_Review",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjU0Mjg3MzQzLCJpYXQiOjE2NTM0MjMzNDMsImp0aSI6IjkxMjNmNjYxMzgxYjQ4MWU5NWMxODNlN2RiMTgzMDE0IiwidXNlcl9pZCI6MiwidXNlcm5hbWUiOiJkYW50aGVtYW4iLCJmaXJzdF9uYW1lIjoiRGFuaWVsIiwiaXNfYXJ0aXN0IjpmYWxzZSwiaXNfcmV2aWV3ZXIiOnRydWV9.SJW5PEaLdQYxa7eC0nXzDS5QiMZmMOtIbFyWZ2nYln4",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/mulo/3/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"mulo",
+						"3",
+						""
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

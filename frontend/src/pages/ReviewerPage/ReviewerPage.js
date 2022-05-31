@@ -122,8 +122,6 @@ const ReviewerPage = () => {
             <Card style={{ width: '27rem' }}>
                 <iframe 
                     id="ytplayer" 
-                    title="MyPlayer"
-                    type="text/html" 
                     width="430" 
                     height="280"
                     src={`https://www.youtube.com/embed/${song.video_id}?autoplay=1&origin=http://example.com`}
