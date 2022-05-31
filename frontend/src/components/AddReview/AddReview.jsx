@@ -29,7 +29,7 @@ const AddReview = ({postReview}) => {
     return ( 
         <div> 
             <div className='fixed-bottom'>
-                <Card body>
+                <Card body bg={'secondary'}>
                     <Form onSubmit={handleSubmit}>
                         <Row>
                             <Col>

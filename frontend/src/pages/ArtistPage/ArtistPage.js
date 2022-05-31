@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { Form, Row , Col, Button, Card} from 'react-bootstrap';
+import Container from 'react-bootstrap/Container'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import AddSong from '../../components/AddSong/AddSong';
 import axios from 'axios';
 import useAuth from "../../hooks/useAuth";
+import './ArtistPage.css'
 
 
 const ArtistPage = () => {
@@ -121,7 +123,9 @@ const ArtistPage = () => {
 
     return ( 
         <div>
-            <h3>Artist Page </h3>
+            <Container>
+            <Row>
+            <Col>
             <div>
                 <h1>
                     {`Hi ${user.username} your overall rating score is ${overallRating}%`}
@@ -130,7 +134,7 @@ const ArtistPage = () => {
             <div>
                 <Form onChange={(event) => setSearchCity(event.target.value)}>
                     <Col>
-                        <Form.Control placeholder="Type in a city to see ratings" />
+                        <Form.Control placeholder="Type in a city to see ratings in that area." />
                     </Col>
                 </Form>
             </div>
@@ -139,26 +143,26 @@ const ArtistPage = () => {
                     {`Your overall rating score for this city is  ${overallCityRating || 0}% and there are ${getLengthOfCityReviews/5 || 'currently no'} reviews from this city`}
                 </h3>
             </div>
-            <div>
-            <h1>Order by city</h1>
-            <div>
-            <Button variant="secondary" onClick={() =>{
-                setListOrder('city')}}>CITY A-Z
-            </Button>
-            <Button variant="secondary" onClick={() =>{
-                setListOrder('city reverse')}}>CITY Z-A
-            </Button>
-            <Button variant="secondary" onClick={() =>{
-                setListOrder('rate')}}>RATING 5-1
-            </Button>
-            <Button variant="secondary" onClick={() =>{
-                setListOrder('rate reverse')}}>RATING 1-5
-            </Button>
-        </div>
+            </Col>
+            <Col>
+            <div className="sort-btn">
+                <Button  size="lg" variant="secondary" onClick={() =>{
+                    setListOrder('city')}}>CITY A-Z
+                </Button>
+                <Button  size="lg" variant="secondary" onClick={() =>{
+                    setListOrder('city reverse')}}>CITY Z-A
+                </Button>
+                <Button  size="lg" variant="secondary" onClick={() =>{
+                    setListOrder('rate')}}>RATING 5-1
+                </Button>
+                <Button  size="lg" variant="secondary" onClick={() =>{
+                    setListOrder('rate reverse')}}>RATING 1-5
+                </Button>
+            </div>
             {userReviews.map(reviewByCity => {
                 return (
-                    <div>
-                    <Card style={{ width: '20rem' }}>
+                    <div className='sort-card'>
+                    <Card bg={'warning'} text={'white'} border={'dark'}style={{ width: '20rem' }}>
                         <Card.Body>
                             <Card.Title>Review ID: {reviewByCity.id}</Card.Title>
                             <Card.Text>
@@ -175,8 +179,9 @@ const ArtistPage = () => {
                     </div>
                 );
             })}
-            </div>
-
+            </Col>
+            </Row>
+            </Container>
             <AddSong fixed="bottom" postSong={postSong} /> 
         </div>
      );
