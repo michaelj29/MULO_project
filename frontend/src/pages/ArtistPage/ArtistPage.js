@@ -128,7 +128,7 @@ const ArtistPage = () => {
             <Col>
             <div>
                 <h1>
-                    {`Hi ${user.username} your overall rating score is ${overallRating}%`}
+                    {`Hi ${user.username}, your overall rating score is ${overallRating || 0}%!`}
                 </h1>
             </div>
             <div>
@@ -140,7 +140,7 @@ const ArtistPage = () => {
             </div>
             <div>
                 <h3>
-                    {`Your overall rating score for this city is  ${overallCityRating || 0}% and there are ${getLengthOfCityReviews/5 || 'currently no'} reviews from this city`}
+                    {`Your overall rating score for this city is  ${overallCityRating || 0}% and there are ${getLengthOfCityReviews/5 || 'currently no'} reviews from this city.`}
                 </h3>
             </div>
             </Col>

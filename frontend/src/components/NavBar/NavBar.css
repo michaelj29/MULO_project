@@ -7,9 +7,11 @@ ul {
 li {
   margin-top: 50px;
   font-size: 1.25rem;
+  margin-right: 20px;
 }
 
 .navBar {
+  width: 100%;
   background: #757575;
   box-shadow: 4px 2px 5px gray;
   color: white;
@@ -24,10 +26,6 @@ li {
   padding: 0.4rem 0.5rem;
 }
 
-.navBar button:hover {
-  background: white;
-  cursor: pointer;
-}
 
 .brand {
   cursor: pointer;
