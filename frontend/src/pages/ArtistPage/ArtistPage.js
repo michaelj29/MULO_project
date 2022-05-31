@@ -146,16 +146,16 @@ const ArtistPage = () => {
             </Col>
             <Col>
             <div className="sort-btn">
-                <Button  size="lg" variant="secondary" onClick={() =>{
+                <Button  size="lg" variant="success" onClick={() =>{
                     setListOrder('city')}}>CITY A-Z
                 </Button>
-                <Button  size="lg" variant="secondary" onClick={() =>{
+                <Button  size="lg" variant="success" onClick={() =>{
                     setListOrder('city reverse')}}>CITY Z-A
                 </Button>
-                <Button  size="lg" variant="secondary" onClick={() =>{
+                <Button  size="lg" variant="success" onClick={() =>{
                     setListOrder('rate')}}>RATING 5-1
                 </Button>
-                <Button  size="lg" variant="secondary" onClick={() =>{
+                <Button  size="lg" variant="success" onClick={() =>{
                     setListOrder('rate reverse')}}>RATING 1-5
                 </Button>
             </div>

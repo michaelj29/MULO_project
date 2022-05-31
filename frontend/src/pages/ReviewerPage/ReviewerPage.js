@@ -18,7 +18,7 @@ const ReviewerPage = () => {
 
     const myReviews = reviews.filter(review => review.user_id === user.id);
     const searchBySongTitle = songs.filter(song => {
-       if(song.song_title.toLowerCase() === searchSong.toLocaleLowerCase()){
+       if(song.song_title.toLowerCase() === searchSong.toLowerCase()){
            return true
        } else if (searchSong === ''){
            return song
@@ -132,7 +132,7 @@ const ReviewerPage = () => {
                 <Card.Body>
                     <Card.Title>{song.stage_name} - {song.song_title}</Card.Title>
                     <Card.Text>
-                    {`SongID: ${song.id}\n Genre: ${song.genre}\n Year: ${song.year}`}
+                    {`SongID: ${song.id}, Genre: ${song.genre}, Year: ${song.year}`}
                     </Card.Text>
                 </Card.Body>
             </Card> 
@@ -156,7 +156,7 @@ const ReviewerPage = () => {
                         {`Favorite Lyric: ${reviews.favorite_lyric}`}
                         </Card.Text>
                         <Card.Text>
-                        {`SongID: ${reviews.song.id}`}
+                        {`SongID:${reviews.song.id}`}
                         </Card.Text>
                         <Card.Text>
                         {`${reviews.overview}`}
