@@ -23,7 +23,7 @@ const ReviewerPage = () => {
        } else if (searchSong === ''){
            return song
        }
-    })
+    });
 
     async function postReview(newReview){
     try {
@@ -32,9 +32,9 @@ const ReviewerPage = () => {
               Authorization: "Bearer " + token,
             },
           });
+          console.log(response.data)
     } catch (err) {
         console.log('Error in postReview function in ReviewerPage.js file')
-        
     }
     };
 
@@ -79,6 +79,7 @@ const ReviewerPage = () => {
                 Authorization: "Bearer " + token,
               },
             });
+            console.log(response.data)
           } catch (error) {
             console.log(error.response.data);
           }
@@ -119,8 +120,9 @@ const ReviewerPage = () => {
             {searchBySongTitle.map(song => {
                 return (
                     <div>
-            <Card style={{ width: '27rem' }}>
+            <Card border={'dark'} style={{ width: '27rem', marginBottom: '10px'}}>
                 <iframe 
+                    title='video'
                     id="ytplayer" 
                     width="430" 
                     height="280"
@@ -138,26 +140,26 @@ const ReviewerPage = () => {
         );
     })}
     </Col>
-        <Col className='reviews'>
+        <Col className='sort-col'>
         <div >
         {myReviews.map(reviews => {
             return (
                 <div>
-                <Card  bg={'warning'} text={'white'} border={'dark'}style={{ width: '20rem' }}>
+                <Card  bg={'warning'} text={'white'} border={'dark'} style={{ width: '20rem', marginBottom: '10px' }}>
                     <Card.Body>
                         <Card.Header>{user.username}  || Review ID: {reviews.id} </Card.Header>
                         <Card.Title>{`Favorite instrument: ${reviews.favorite_instrument}`}</Card.Title>
-                        <Card.Text>
+                        <Card.Text className="card-text">
                         {`Rating: ${reviews.rating}`}
                         </Card.Text>
-                        <Card.Text>
+                        <Card.Text  className="card-text">
                         {`Favorite Lyric: ${reviews.favorite_lyric}`}
                         </Card.Text>
-                        <Card.Text>
-                        {`SongID:${reviews.song.id}`}
+                        <Card.Text  className="card-text">
+                        {`SongID: ${reviews.song.id}`}
                         </Card.Text>
                         <Card.Text>
-                        {`${reviews.overview}`}
+                        {`Overview: ${reviews.overview}`}
                         </Card.Text>
                         <Button variant="danger" onClick={() => {
                             deleteReview(reviews.id);

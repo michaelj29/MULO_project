@@ -1,8 +1,8 @@
 import React from "react";
 import { useEffect, useState } from "react";
 import useAuth from "../../hooks/useAuth";
-import Card from 'react-bootstrap/Card'
 import './HomePage.css'
+import { Form, Col,  Card} from 'react-bootstrap';
 
 import axios from "axios";
 
@@ -12,6 +12,15 @@ const HomePage = () => {
   //TODO: Add an AddCars Page to add a car for a logged in user's garage
   const [user, token] = useAuth();
   const [reviews, setReviews] = useState([]);
+  const [searchSong, setSearchSong] = useState('');
+
+  const searchReviewBySongTitle = reviews.filter(song => {
+    if(song.song.song_title.toLowerCase() === searchSong.toLowerCase()){
+        return true
+    } else if (searchSong === ''){
+        return song
+    }
+ })
 
   useEffect(() => {
     const fetchReviews = async () => {
@@ -32,18 +41,31 @@ const HomePage = () => {
 
   return (
     <div className="card-container">
-      {reviews &&
-        reviews.map((review) => (
-          <p key={review.id}>
+      <div>
+          <Form onChange={(event) => setSearchSong(event.target.value)}>
+              <Col>
+                  <Form.Control placeholder="search a song by title" />
+              </Col>
+          </Form>
+      </div>
+      {searchReviewBySongTitle.map((reviews) => (
+          <p key={reviews.id}>
               <div>
-                <Card className="card" bg={'warning'} text={'white'} border={'dark'}style={{ width: '20rem' }}>
+                <Card className="card" bg={'warning'} text={'white'} border={'dark'} style={{ width: '20rem' }}>
                     <Card.Body>
-                      <Card.Header>City: {review.city} || Rating: {review.rating} </Card.Header>
-                        <Card.Text>
-                        Song title : {review.song.song_title}
+                    <Card.Header>{reviews.user.username}</Card.Header>
+                        <Card.Title>{`Favorite instrument: ${reviews.favorite_instrument}`}</Card.Title>
+                        <Card.Text className="card-text">
+                        {`Rating: ${reviews.rating}`}
+                        </Card.Text>
+                        <Card.Text  className="card-text">
+                        {`Favorite Lyric: ${reviews.favorite_lyric}`}
+                        </Card.Text>
+                        <Card.Text  className="card-text">
+                        {`Song Title: ${reviews.song.song_title}`}
                         </Card.Text>
                         <Card.Text>
-                        Overview: {review.overview}
+                        {`Overview: ${reviews.overview}`}
                         </Card.Text>
                     </Card.Body>
                 </Card> 

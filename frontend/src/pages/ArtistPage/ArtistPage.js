@@ -8,15 +8,17 @@ import useAuth from "../../hooks/useAuth";
 import './ArtistPage.css'
 
 
+
+
 const ArtistPage = () => {
 
     const [user, token] = useAuth();
     const [reviews, setReviews] = useState([]);
     const [searchCity, setSearchCity] = useState("");
+    const [userReviews, setUserReviews] = useState([]);
+    const [listOrder, setListOrder] = useState("");
 
 
-    const [userReviews, setUserReviews] = useState([])
-    const [listOrder, setListOrder] = useState("")
     useEffect(() => {
         switch(listOrder){
             case "rate":
@@ -75,17 +77,6 @@ const ArtistPage = () => {
     const getSumOfCityReviews = getReviewsByCity.reduce((a, b) => a + b.rating, 0);
     const overallCityRating = Math.round((getSumOfCityReviews / getLengthOfCityReviews) * 100);
     const orderHighToLowByRating = [...getUsersReviews].sort((acc, b) => b.rating - acc.rating);
-    const orderHighToLowByCity = [...getUsersReviews].sort((a, b) => {
-        const nameA = a.city.toUpperCase();
-        const nameB = b.city.toUpperCase();
-        if (nameA < nameB) {
-            return -1;
-        }
-        if (nameA > nameB) {
-            return 1;
-        }
-        return 0;
-    });
 
     useEffect(() => {
         const fetchReviews = async () => {
@@ -119,7 +110,17 @@ const ArtistPage = () => {
     }
     };
 
+    // const {isLoaded} = useLoadScript({
+    //     googleMapsApiKey: 'AIzaSyAW1fuC69NgMCjeqUvNeOFKy4OxX85F4FA',
+    // });
 
+    // if(!isLoaded) <div>Loaded. . . .</div>;
+        
+    // return <Map />;
+
+    // function Map(){
+    //     return <GoogleMap zoom={10} center={{lat: 44, lng: -80}  }></GoogleMap>
+    // }
 
     return ( 
         <div>
@@ -127,9 +128,9 @@ const ArtistPage = () => {
             <Row>
             <Col>
             <div>
-                <h1>
+                <h4>
                     {`Hi ${user.username}, your overall rating score is ${overallRating || 0}%!`}
-                </h1>
+                </h4>
             </div>
             <div>
                 <Form onChange={(event) => setSearchCity(event.target.value)}>
@@ -139,12 +140,29 @@ const ArtistPage = () => {
                 </Form>
             </div>
             <div>
-                <h3>
-                    {`Your overall rating score for this city is  ${overallCityRating || 0}% and there are ${getLengthOfCityReviews/5 || 'currently no'} reviews from this city.`}
-                </h3>
+                <p>
+                    {`Your overall rating score for this city is  ${overallCityRating || 0}% and, there are ${getLengthOfCityReviews/5 || 'currently no'} reviews from this city.`}
+                </p>
+            </div>
+            <div>
+                {overallCityRating >= 70? (
+                        <p className='legend'>The red markers on the map indicate suggested venues
+                        <iframe 
+                                className='i-frame'
+                                width="600" 
+                                height="400" 
+                                id="gmap_canvas" 
+                                src={`https://maps.google.com/maps?q=venue%20in%20${searchCity}&t=&z=13&ie=UTF8&iwloc=&output=embed`}
+                                frameborder="0" 
+                                scrolling="yes" 
+                                marginheight="0" 
+                                marginwidth="0">
+                        </iframe></p>) : (
+                            <p>Your ratings needs to be 70% or higher to view suggested venues</p>
+                        )}
             </div>
             </Col>
-            <Col>
+            <Col className='sort-col'>
             <div className="sort-btn">
                 <Button  size="lg" variant="success" onClick={() =>{
                     setListOrder('city')}}>CITY A-Z
@@ -159,20 +177,24 @@ const ArtistPage = () => {
                     setListOrder('rate reverse')}}>RATING 1-5
                 </Button>
             </div>
-            {userReviews.map(reviewByCity => {
+            {userReviews.map(reviews => {
                 return (
                     <div className='sort-card'>
-                    <Card bg={'warning'} text={'white'} border={'dark'}style={{ width: '20rem' }}>
+                    <Card bg={'warning'} text={'white'} border={'dark'}style={{ width: '20rem'}}>
                         <Card.Body>
-                            <Card.Title>Review ID: {reviewByCity.id}</Card.Title>
-                            <Card.Text>
-                                {`Rating: ${reviewByCity.rating}  Favorite Lyric: ${reviewByCity.favorite_lyric}`}
+                            <Card.Header>{reviews.user.username}</Card.Header>
+                            <Card.Title>{`Favorite instrument: ${reviews.favorite_instrument}`}</Card.Title>
+                            <Card.Text className="card-text">
+                            {`Rating: ${reviews.rating}`}
+                            </Card.Text>
+                            <Card.Text  className="card-text">
+                            {`Favorite Lyric: ${reviews.favorite_lyric}`}
+                            </Card.Text>
+                            <Card.Text  className="card-text">
+                            {`Song Title: ${reviews.song.song_title}`}
                             </Card.Text>
                             <Card.Text>
-                                {` City: ${reviewByCity.city}`}
-                            </Card.Text>
-                            <Card.Text>
-                            {`${reviewByCity.overview}`}
+                            {`Overview: ${reviews.overview}`}
                             </Card.Text>
                         </Card.Body>
                     </Card> 

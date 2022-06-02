@@ -5,8 +5,21 @@
 
 .sort-card {
     margin-left: 40px;
+    margin-bottom: 20px;
 }
 
 Button {
     margin: .5px;
+}
+
+.i-frame {
+    margin-bottom: 100px;
+}
+
+.legend {
+    color: red;
+}
+
+.sort-col {
+    margin-bottom: 100px;
 }

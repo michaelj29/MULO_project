@@ -1,1 +1,8 @@
+.card-text {
+    font-size: small;
+    text-align: left;
+}
 
+.sort-col {
+    margin-bottom: 100px;
+}
