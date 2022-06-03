@@ -12,8 +12,13 @@ const AddReview = ({postReview}) => {
     const [overview, setOverview] = useState('');
     const [songId, setSongId] = useState('');
 
+
+
     function handleSubmit(event){
         event.preventDefault();
+
+        // get form value by input name
+        console.log(event.target.city.value)
         let newReview = {
             city : city,
             state: state,
@@ -33,10 +38,10 @@ const AddReview = ({postReview}) => {
                     <Form onSubmit={handleSubmit}>
                         <Row>
                             <Col>
-                            <Form.Control placeholder="City" onChange={(event) => setCity(event.target.value)} value={city}/>
+                            <Form.Control name="city" placeholder="City" onChange={(event) => setCity(event.target.value)} value={city}/>
                             </Col>
                             <Col>
-                            <Form.Control placeholder="State" onChange={(event) => setState(event.target.value)} value={state}/>
+                            <Form.Control name="state" placeholder="State" onChange={(event) => setState(event.target.value)} value={state}/>
                             </Col>
                             <Col>
                             <Form.Control placeholder="Favorite lyrics" onChange={(event) => setFavoriteLyric(event.target.value)} value={favoriteLyric}/>

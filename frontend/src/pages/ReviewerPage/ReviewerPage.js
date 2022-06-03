@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { Form, Row , Col, Button, Card} from 'react-bootstrap';
+import { Form, Row , Col, Button, Card } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Container from 'react-bootstrap/Container'
 import axios from 'axios';
 import useAuth from "../../hooks/useAuth";
 import AddReview from '../../components/AddReview/AddReview';
 import UpdateReview from '../../components/UpdateReview/UpdateReview';
+import Modal  from '../../components/Modal/Modal';
 import './ReviewerPage.css'
 
 const ReviewerPage = () => {
@@ -13,8 +14,31 @@ const ReviewerPage = () => {
     const [user, token] = useAuth();
     const [songs, setSongs] = useState([]);
     const [reviews, setReviews] = useState([]);
-    const [reviewId, setReviewId] = useState('');
     const [searchSong, setSearchSong] = useState('');
+    const [updateReviewData, setUpdateReviewData] = useState({})
+    const [show, setShow] = useState(false)
+
+
+    const fetchReviews = async () => {
+      try {
+        let response = await axios.get("http://127.0.0.1:8000/api/mulo/all-reviews/", {
+          headers: {
+            Authorization: "Bearer " + token,
+          },
+        });
+        setReviews(response.data);
+
+      } catch (error) {
+        console.log(error.response.data);
+      }
+    };
+
+    const handleStartUpdateReview = async (review) => {
+      setUpdateReviewData(review)
+      setShow(true)
+
+      await fetchReviews()
+    }
 
     const myReviews = reviews.filter(review => review.user_id === user.id);
     const searchBySongTitle = songs.filter(song => {
@@ -39,19 +63,7 @@ const ReviewerPage = () => {
     };
 
     useEffect(() => {
-        const fetchReviews = async () => {
-          try {
-            let response = await axios.get("http://127.0.0.1:8000/api/mulo/all-reviews/", {
-              headers: {
-                Authorization: "Bearer " + token,
-              },
-            });
-            setReviews(response.data);
 
-          } catch (error) {
-            console.log(error.response.data);
-          }
-        };
         fetchReviews();
       }, [token]);
 
@@ -85,7 +97,7 @@ const ReviewerPage = () => {
           }
         };
 
-        const updateReview = async (editReview) => {
+        const updateReview = async (editReview, reviewId) => {
 
             try {
               let response = await axios.put(`http://127.0.0.1:8000/api/mulo/${reviewId}/`, editReview, {
@@ -102,9 +114,9 @@ const ReviewerPage = () => {
 
     return ( 
         <div className='container'>
-            <div className='fixed-top'>
-                <UpdateReview  updateReview={updateReview} setReviewId={setReviewId} />
-            </div>
+              <Modal show={show} onClose={() => setShow(false)} >
+                <UpdateReview  updateReview={updateReview}  updateReviewData={updateReviewData || {}}/>
+                </Modal>
             <Container className='columns'>
             <Row className="row" xl>
                 <Col>
@@ -142,28 +154,32 @@ const ReviewerPage = () => {
     </Col>
         <Col className='sort-col'>
         <div >
-        {myReviews.map(reviews => {
+        {myReviews.map(review => {
             return (
                 <div>
                 <Card  bg={'warning'} text={'white'} border={'dark'} style={{ width: '20rem', marginBottom: '10px' }}>
                     <Card.Body>
-                        <Card.Header>{user.username}  || Review ID: {reviews.id} </Card.Header>
-                        <Card.Title>{`Favorite instrument: ${reviews.favorite_instrument}`}</Card.Title>
+                        <Card.Header>{user.username} </Card.Header>
+                        <Card.Title>{`Favorite instrument: ${review.favorite_instrument}`}</Card.Title>
                         <Card.Text className="card-text">
-                        {`Rating: ${reviews.rating}`}
+                        {`Rating: ${review.rating}`}
                         </Card.Text>
                         <Card.Text  className="card-text">
-                        {`Favorite Lyric: ${reviews.favorite_lyric}`}
+                        {`Favorite Lyric: ${review.favorite_lyric}`}
                         </Card.Text>
                         <Card.Text  className="card-text">
-                        {`SongID: ${reviews.song.id}`}
+                        {`Song Title: ${review.song.song_title}`}
                         </Card.Text>
                         <Card.Text>
-                        {`Overview: ${reviews.overview}`}
+                        {`Overview: ${review.overview}`}
                         </Card.Text>
                         <Button variant="danger" onClick={() => {
-                            deleteReview(reviews.id);
+                            deleteReview(review.id);
                         }}>DELETE</Button>
+
+                        <Button variant='success' onClick={()=> handleStartUpdateReview(review)}>
+                          UPDATE
+                        </Button>
                     </Card.Body>
                 </Card> 
             </div>

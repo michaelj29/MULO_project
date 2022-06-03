@@ -110,17 +110,6 @@ const ArtistPage = () => {
     }
     };
 
-    // const {isLoaded} = useLoadScript({
-    //     googleMapsApiKey: 'AIzaSyAW1fuC69NgMCjeqUvNeOFKy4OxX85F4FA',
-    // });
-
-    // if(!isLoaded) <div>Loaded. . . .</div>;
-        
-    // return <Map />;
-
-    // function Map(){
-    //     return <GoogleMap zoom={10} center={{lat: 44, lng: -80}  }></GoogleMap>
-    // }
 
     return ( 
         <div>
