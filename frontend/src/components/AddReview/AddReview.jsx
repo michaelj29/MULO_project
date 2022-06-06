@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Form, Row , Col, Button, Card} from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { Link } from "react-router-dom";
 
-const AddReview = ({postReview}) => {
+const AddReview = ({postReview, song}) => {
 
     const [city, setCity] = useState('');
     const [state, setState] = useState('');
@@ -10,15 +11,11 @@ const AddReview = ({postReview}) => {
     const [favoriteInstrument, setFavoriteInstrument] = useState('');
     const [rating, setRating] = useState('');
     const [overview, setOverview] = useState('');
-    const [songId, setSongId] = useState('');
-
-
 
     function handleSubmit(event){
         event.preventDefault();
 
-        // get form value by input name
-        console.log(event.target.city.value)
+        
         let newReview = {
             city : city,
             state: state,
@@ -26,9 +23,16 @@ const AddReview = ({postReview}) => {
             favorite_instrument: favoriteInstrument,
             rating: rating,
             overview: overview,
-            song_id: songId
+            song_id: song[0].id
         }
-        postReview(newReview)
+        postReview(newReview);
+        setCity('');
+        setState('');
+        setFavoriteLyric('');
+        setFavoriteInstrument('');
+        setRating('');
+        setOverview('');
+
     };
 
     return ( 
@@ -54,9 +58,6 @@ const AddReview = ({postReview}) => {
                             </Col>
                             <Col>
                             <Form.Control placeholder="Overall thoughts" onChange={(event) => setOverview(event.target.value)} value={overview}/>
-                            </Col>
-                            <Col>
-                            <Form.Control placeholder="Song Id" onChange={(event) => setSongId(event.target.value)} value={songId}/>
                             </Col>
                             <Col xs="auto" className="my-1">
                                 <Button type="submit">SUBMIT</Button>

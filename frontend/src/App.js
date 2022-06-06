@@ -9,6 +9,7 @@ import LoginPage from "./pages/LoginPage/LoginPage";
 import RegisterPage from "./pages/RegisterPage/RegisterPage";
 import ReviewerPage from "./pages/ReviewerPage/ReviewerPage";
 import ArtistPage from "./pages/ArtistPage/ArtistPage";
+import SongReviewPage from "./pages/SongReviewPage/SongReviewPage";
 // Component Imports
 import Navbar from "./components/NavBar/NavBar";
 import Footer from "./components/Footer/Footer";
@@ -44,6 +45,14 @@ function App() {
           element={
             <PrivateRoute>
               <ArtistPage />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/song-review-page/:songId"
+          element={
+            <PrivateRoute>
+              <SongReviewPage />
             </PrivateRoute>
           }
         />

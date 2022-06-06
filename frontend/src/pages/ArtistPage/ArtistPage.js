@@ -147,7 +147,7 @@ const ArtistPage = () => {
                                 marginheight="0" 
                                 marginwidth="0">
                         </iframe></p>) : (
-                            <p>Your ratings needs to be 70% or higher to view suggested venues</p>
+                            <p>Your rating needs to be 70% or higher to view suggested venues</p>
                         )}
             </div>
             </Col>

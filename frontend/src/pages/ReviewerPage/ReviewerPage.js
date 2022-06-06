@@ -3,11 +3,11 @@ import { Form, Row , Col, Button, Card } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Container from 'react-bootstrap/Container'
 import axios from 'axios';
-import useAuth from "../../hooks/useAuth";
-import AddReview from '../../components/AddReview/AddReview';
 import UpdateReview from '../../components/UpdateReview/UpdateReview';
 import Modal  from '../../components/Modal/Modal';
 import './ReviewerPage.css'
+import { Link } from "react-router-dom";
+import useAuth from "../../hooks/useAuth";
 
 const ReviewerPage = () => {
 
@@ -15,8 +15,10 @@ const ReviewerPage = () => {
     const [songs, setSongs] = useState([]);
     const [reviews, setReviews] = useState([]);
     const [searchSong, setSearchSong] = useState('');
-    const [updateReviewData, setUpdateReviewData] = useState({})
-    const [show, setShow] = useState(false)
+    const [updateReviewData, setUpdateReviewData] = useState({});
+    const [songData, setSongData] = useState({});
+    const [show, setShow] = useState(false);
+
 
 
     const fetchReviews = async () => {
@@ -33,12 +35,33 @@ const ReviewerPage = () => {
       }
     };
 
+
     const handleStartUpdateReview = async (review) => {
       setUpdateReviewData(review)
       setShow(true)
 
       await fetchReviews()
     }
+    
+    const fetchSongs = async () => {
+      try {
+        let response = await axios.get("http://127.0.0.1:8000/api/mulo/all-songs/", {
+          headers: {
+            Authorization: "Bearer " + token,
+          },
+        });
+        setSongs(response.data);
+      } catch (error) {
+        console.log(error.response.data);
+      }
+    };
+
+
+    const handleSubmitReview = async (song) => {
+      setSongData(song);
+      await fetchSongs();
+    }
+
 
     const myReviews = reviews.filter(review => review.user_id === user.id);
     const searchBySongTitle = songs.filter(song => {
@@ -49,37 +72,12 @@ const ReviewerPage = () => {
        }
     });
 
-    async function postReview(newReview){
-    try {
-        let response = await axios.post('http://127.0.0.1:8000/api/mulo/create/', newReview, {
-            headers: {
-              Authorization: "Bearer " + token,
-            },
-          });
-          console.log(response.data)
-    } catch (err) {
-        console.log('Error in postReview function in ReviewerPage.js file')
-    }
-    };
-
     useEffect(() => {
 
         fetchReviews();
       }, [token]);
 
     useEffect(() => {
-        const fetchSongs = async () => {
-          try {
-            let response = await axios.get("http://127.0.0.1:8000/api/mulo/all-songs/", {
-              headers: {
-                Authorization: "Bearer " + token,
-              },
-            });
-            setSongs(response.data);
-          } catch (error) {
-            console.log(error.response.data);
-          }
-        };
         fetchSongs();
       }, [token]);
 
@@ -143,9 +141,11 @@ const ReviewerPage = () => {
                 </iframe>
                 <Card.Body>
                     <Card.Title>{song.stage_name} - {song.song_title}</Card.Title>
-                    <Card.Text>
-                    {`SongID: ${song.id}, Genre: ${song.genre}, Year: ${song.year}`}
-                    </Card.Text>
+                    <Link to={`/song-review-page/:${song.id}`} style={{ textDecoration: "none", color: "white" }}>
+                    <Button  variant='primary'> 
+                          REVIEW
+                        </Button>
+          </Link>
                 </Card.Body>
             </Card> 
           </div>
@@ -176,7 +176,6 @@ const ReviewerPage = () => {
                         <Button variant="danger" onClick={() => {
                             deleteReview(review.id);
                         }}>DELETE</Button>
-
                         <Button variant='success' onClick={()=> handleStartUpdateReview(review)}>
                           UPDATE
                         </Button>
@@ -188,9 +187,7 @@ const ReviewerPage = () => {
         </div>
         </Col>
     </Row>
-            <div>
-                <AddReview fixed="bottom" postReview={postReview}/>
-            </div>
+
         </Container>
     </div>
      );
