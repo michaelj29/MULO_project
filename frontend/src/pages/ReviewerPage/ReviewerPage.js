@@ -183,7 +183,7 @@ const ReviewerPage = () => {
                 </Card> 
             </div>
             );
-        })}
+        }).reverse()}
         </div>
         </Col>
     </Row>
