@@ -174,6 +174,9 @@ const ArtistPage = () => {
                             <Card.Header>{reviews.user.username}</Card.Header>
                             <Card.Title>{`Favorite instrument: ${reviews.favorite_instrument}`}</Card.Title>
                             <Card.Text className="card-text">
+                            {`City: ${reviews.city}`}
+                            </Card.Text>
+                            <Card.Text className="card-text">
                             {`Rating: ${reviews.rating}`}
                             </Card.Text>
                             <Card.Text  className="card-text">
